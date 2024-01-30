@@ -1,0 +1,26 @@
+Il progetto mira a creare un'applicazione chiamata Foodies, basata su un modello di business peer-to-peer, dedicata alla consegna di cibo a domicilio. Chiunque, non solo i ristoranti, può preparare un piatto e renderlo disponibile online, pubblicando le indicazioni principali.
+
+Principali funzionalità del progetto:
+
+Profili dei partecipanti:
+
+Produttore (persona che prepara il cibo), rider e cliente. Tutti devono registrarsi sull'app e fornire i dati amministrativi necessari.
+Pubblicazione dei piatti:
+
+Il produttore può pubblicare i propri piatti, specificando la tipologia (pasta, zuppa, secondo, ecc.), la quantità, l'orario di disponibilità per il ritiro e il costo.
+Ogni piatto è accompagnato da una descrizione e un commento.
+Processo di acquisto da parte del cliente:
+
+Il cliente può visualizzare i piatti disponibili e acquistarli tramite l'app.
+Assegnazione del rider:
+
+I rider più vicini al produttore ricevono un messaggio quando un piatto viene acquistato.
+Il primo rider che conferma la volontà di ritirare il piatto ottiene l'incarico.
+Conferma delle azioni del rider:
+
+Il rider comunica attraverso l'app il ritiro effettuato.
+Dopo la consegna, il rider comunica il completamento della consegna.
+Penalità per ritardi:
+
+Se il rider non consegna il piatto entro 30 minuti dal ritiro, subisce una penalità di sospensione di due ore dalla possibilità di ritirare altri piatti.
+Dopo 5 penalizzazioni, al rider non è più consentito lavorare per Foodies.

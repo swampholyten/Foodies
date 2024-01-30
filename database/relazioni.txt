@@ -1,0 +1,25 @@
+City (cityID, cityName)
+
+Address (addressID, street, cityID, zipCode)
+
+User (userID, firstName, lastName, email, phoneNumber, addressID, birthday, gender, password)
+
+Company (companyID, companyName, addressID)
+
+Rider (riderID, licenceNumber, userID, companyID)
+
+Customer (customerID, userID)
+
+Producer (producerID, userID)
+
+FoodType (foodTypeID, typeName, foodTypeDescription, expirationTime)
+
+Food (foodID, foodName, foodDescription, foodPrice, createdTime, producerID, foodTypeID)
+
+Order (orderID, customerID, riderID, madeTime, deliveredTime)
+
+OrderItem (orderItemID, orderID, foodID, quantity, subtotal)
+
+Request (requestID, companyID, orderID, requestDate, publishedTime, acceptedTime, publishedBy, acceptedBy, fromAddressID, toAddressID, isCompleted)
+
+RiderPenalty (penaltyID, riderID, penaltyTime, suspensionDuration)

@@ -1,0 +1,62 @@
+Select all cities:
+    SELECT * FROM City;
+
+Select all addresses with their cities:
+    SELECT Address.*, City.cityName FROM Address
+    JOIN City ON Address.cityID = City.cityID;
+
+Select all users with their addresses:
+    SELECT User.*, Address.street, Address.zipCode, City.cityName FROM User
+    JOIN Address ON User.addressID = Address.addressID
+    JOIN City ON Address.cityID = City.cityID;
+
+Select all companies with their addresses:
+    SELECT Company.*, Address.street, Address.zipCode, City.cityName FROM Company
+    JOIN Address ON Company.addressID = Address.addressID
+    JOIN City ON Address.cityID = City.cityID;
+
+Select all riders with their associated users and companies:
+    SELECT Rider.*, User.firstName AS riderFirstName, User.lastName AS riderLastName, Company.companyName FROM Rider
+    JOIN User ON Rider.userID = User.userID
+    JOIN Company ON Rider.companyID = Company.companyID;
+
+Select all customers with their associated users:
+    SELECT Customer.*, User.firstName AS customerFirstName, User.lastName AS customerLastName FROM Customer
+    JOIN User ON Customer.userID = User.userID;
+
+Select all producers with their associated users:
+    SELECT Producer.*, User.firstName AS producerFirstName, User.lastName AS producerLastName FROM Producer
+    JOIN User ON Producer.userID = User.userID;
+
+Select all food types:
+    SELECT * FROM FoodType;
+
+Select all foods with their producers and food types:
+    SELECT Food.*, Producer.producerID, Producer.userID AS producerUserID, FoodType.typeName FROM Food
+    JOIN Producer ON Food.producerID = Producer.producerID
+    JOIN FoodType ON Food.foodTypeID = FoodType.foodTypeID;
+
+Select all orders with their customers and riders:
+    SELECT `Order`.*, Customer.customerID, Customer.userID AS customerUserID, Rider.riderID, Rider.userID AS riderUserID FROM `Order`
+    LEFT JOIN Customer ON `Order`.customerID = Customer.customerID
+    LEFT JOIN Rider ON `Order`.riderID = Rider.riderID;
+
+Select all order items with their associated orders and foods:
+    SELECT OrderItem.*, `Order`.orderID, Food.foodID, Food.foodName FROM OrderItem
+    JOIN `Order` ON OrderItem.orderID = `Order`.orderID
+    JOIN Food ON OrderItem.foodID = Food.foodID;
+
+Select all requests with their associated companies, orders, and riders:
+    SELECT Request.*, Company.companyName, `Order`.orderID, Rider.riderID FROM Request
+    LEFT JOIN Company ON Request.companyID = Company.companyID
+    LEFT JOIN `Order` ON Request.orderID = `Order`.orderID
+    LEFT JOIN Rider ON Request.acceptedBy = Rider.riderID;
+
+Select all rider penalties with their associated riders:
+    SELECT RiderPenalty.*, Rider.riderID, Rider.userID AS riderUserID FROM RiderPenalty
+    JOIN Rider ON RiderPenalty.riderID = Rider.riderID;
+
+Select orders made by a specific customer:
+    SELECT `Order`.* FROM `Order`
+    JOIN Customer ON `Order`.customerID = Customer.customerID
+    WHERE Customer.userID = [your_customer_user_id];

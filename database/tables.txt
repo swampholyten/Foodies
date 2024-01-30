@@ -1,0 +1,131 @@
+-- Create City table
+CREATE TABLE City (
+    cityID INT PRIMARY KEY AUTO_INCREMENT,
+    cityName VARCHAR(255) NOT NULL
+);
+
+-- Create Address table
+CREATE TABLE Address (
+    addressID INT PRIMARY KEY AUTO_INCREMENT,
+    street VARCHAR(255) NOT NULL,
+    cityID INT NOT NULL,
+    zipCode VARCHAR(10) NOT NULL,
+    FOREIGN KEY (cityID) REFERENCES City(cityID)
+);
+
+-- Create User table
+CREATE TABLE `User` (
+    userID INT PRIMARY KEY AUTO_INCREMENT,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phoneNumber VARCHAR(15) NOT NULL,
+    addressID INT,
+    birthday DATE,
+    gender VARCHAR(10),
+    password VARCHAR(255) NOT NULL,
+    FOREIGN KEY (addressID) REFERENCES Address(addressID)
+);
+
+-- Create Company table
+CREATE TABLE Company (
+    companyID INT PRIMARY KEY AUTO_INCREMENT,
+    companyName VARCHAR(255) NOT NULL,
+    addressID INT NOT NULL,
+    FOREIGN KEY (addressID) REFERENCES Address(addressID)
+);
+
+-- Create Rider table
+CREATE TABLE Rider (
+    riderID INT PRIMARY KEY AUTO_INCREMENT,
+    licenceNumber VARCHAR(10) UNIQUE NOT NULL,
+    userID INT UNIQUE NOT NULL,
+    companyID INT,
+    FOREIGN KEY (userID) REFERENCES User(userID),
+    FOREIGN KEY (companyID) REFERENCES Company(companyID)
+);
+
+-- Create Customer table
+CREATE TABLE Customer (
+    customerID INT PRIMARY KEY AUTO_INCREMENT,
+    userID INT UNIQUE NOT NULL,
+    FOREIGN KEY (userID) REFERENCES User(userID)
+);
+
+-- Create Producer table
+CREATE TABLE Producer (
+    producerID INT PRIMARY KEY AUTO_INCREMENT,
+    userID INT UNIQUE NOT NULL,
+    FOREIGN KEY (userID) REFERENCES User(userID)
+);
+
+-- Create FoodType table
+CREATE TABLE FoodType (
+    typeName VARCHAR(255) PRIMARY KEY NOT NULL,
+    foodTypeDescription TEXT,
+    expirationTime INT NOT NULL
+);
+
+-- Create Food table
+CREATE TABLE Food (
+    foodID INT PRIMARY KEY AUTO_INCREMENT,
+    foodName VARCHAR(255) NOT NULL,
+    foodDescription TEXT,
+    foodPrice DECIMAL(10, 2) NOT NULL,
+    createdTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    producerID INT NOT NULL,
+    typeName VARCHAR(255) NOT NULL,
+    FOREIGN KEY (producerID) REFERENCES Producer(producerID),
+    FOREIGN KEY (typeName) REFERENCES FoodType(typeName)
+);
+
+-- Create Order table
+CREATE TABLE `Order` (
+    orderID INT PRIMARY KEY AUTO_INCREMENT,
+    customerID INT NOT NULL,
+    riderID INT NOT NULL,
+    madeTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deliveredTime DATETIME DEFAULT NULL,
+    FOREIGN KEY (customerID) REFERENCES Customer(customerID),
+    FOREIGN KEY (riderID) REFERENCES Rider(riderID)
+);
+
+-- Create OrderItem table
+CREATE TABLE OrderItem (
+    orderItemID INT PRIMARY KEY AUTO_INCREMENT,
+    orderID INT NOT NULL,
+    foodID INT NOT NULL,
+    quantity INT NOT NULL,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (orderID) REFERENCES `Order`(orderID),
+    FOREIGN KEY (foodID) REFERENCES Food(foodID)
+);
+
+-- Create Request table
+CREATE TABLE Request (
+    requestID INT PRIMARY KEY AUTO_INCREMENT,
+    orderID INT NOT NULL,
+    requestDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    publishedTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+    acceptedTime DATETIME DEFAULT NULL,
+    publishedBy INT NOT NULL,
+    acceptedBy INT DEFAULT NULL,
+    fromAddressID INT NOT NULL,
+    toAddressID INT NOT NULL,
+    isCompleted BOOLEAN DEFAULT FALSE,
+
+    FOREIGN KEY (orderID) REFERENCES `Order`(orderID),
+    FOREIGN KEY (publishedBy) REFERENCES Company(companyID),
+    FOREIGN KEY (acceptedBy) REFERENCES Rider(riderID),
+    FOREIGN KEY (fromAddressID) REFERENCES Address(addressID),
+    FOREIGN KEY (toAddressID) REFERENCES Address(addressID)
+);
+
+-- Create RiderPenalty table
+CREATE TABLE RiderPenalty (
+    penaltyID INT PRIMARY KEY AUTO_INCREMENT,
+    riderID INT NOT NULL,
+    penaltyTime DATETIME DEFAULT CURRENT_TIMESTAMP, -- 修改为 DATETIME 类型
+    suspensionDuration INT DEFAULT 120,
+    FOREIGN KEY (riderID) REFERENCES Rider(riderID)
+);

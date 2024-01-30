@@ -1,0 +1,129 @@
+-- 插入 City 表的数据
+INSERT INTO City (cityName) VALUES 
+    ('Roma'),
+    ('Milano'),
+    ('Firenze'),
+    ('Napoli'),
+    ('Torino'),
+    ('Bologna'),
+    ('Palermo');
+
+-- 插入 Address 表的数据
+INSERT INTO Address (street, cityID, zipCode) VALUES 
+    ('Via Roma 123', 1, '00100'),
+    ('Corso Vittorio Emanuele II 45', 2, '20121'),
+    ('Piazza della Signoria 10', 3, '50122'),
+    ('Via Toledo 67', 4, '80132'),
+    ('Via Po 25', 5, '10123'),
+    ('Via dell''Indipendenza 36', 6, '40121'),
+    ('Via Maqueda 89', 7, '90133');
+
+-- 插入 User 表的数据
+INSERT INTO `User` (firstName, lastName, email, phoneNumber, addressID, birthday, gender, password) VALUES 
+    ('Luca', 'Rossi', 'luca.rossi@email.it', '+39 1234567890', 1, '1985-03-15', 'Male', 'password123'),
+    ('Giulia', 'Bianchi', 'giulia.bianchi@email.it', '+39 9876543210', 2, '1990-07-22', 'Female', 'pass456'),
+    ('Marco', 'Verdi', 'marco.verdi@email.it', '+39 3456789012', 3, '1988-11-05', 'Male', 'secure789'),
+    ('Elena', 'Rizzo', 'elena.rizzo@email.it', '+39 5678901234', 4, '1995-04-30', 'Female', 'pwd987'),
+    ('Davide', 'Moretti', 'davide.moretti@email.it', '+39 6789012345', 5, '1982-09-18', 'Male', 'p@ss123'),
+    ('Alessia', 'Galli', 'alessia.galli@email.it', '+39 8901234567', 6, '1998-02-12', 'Female', 'secure456'),
+    ('Roberto', 'Ferrari', 'roberto.ferrari@email.it', '+39 0123456789', 7, '1980-06-25', 'Male', 'password789');
+
+-- 插入 Company 表的数据
+INSERT INTO Company (companyName, addressID) VALUES 
+    ('Pizza Italia', 1),
+    ('Pasta Express', 2),
+    ('Gelato Fantastico', 3),
+    ('Osteria Del Gusto', 4),
+    ('Trattoria Bella', 5),
+    ('Panini Deliziosi', 6),
+    ('Sicilia Sapore', 7);
+
+-- 插入 Rider 表的数据
+INSERT INTO Rider (licenceNumber, userID, companyID) VALUES 
+    ('RN12345', 1, 1),
+    ('RN67890', 2, 2),
+    ('RN23456', 3, 3),
+    ('RN78901', 4, 4),
+    ('RN34567', 5, 5),
+    ('RN89012', 6, 6),
+    ('RN45678', 7, 7);
+
+-- 插入 Customer 表的数据
+INSERT INTO Customer (userID) VALUES 
+    (1),
+    (2),
+    (3),
+    (4),
+    (5),
+    (6),
+    (7);
+
+-- 插入 Producer 表的数据
+INSERT INTO Producer (userID) VALUES 
+    (1),
+    (2),
+    (3),
+    (4),
+    (5),
+    (6),
+    (7);
+
+-- 插入 FoodType 表的数据
+INSERT INTO FoodType (typeName, foodTypeDescription, expirationTime) VALUES 
+    ('Pizza', 'Traditional Italian pizza', 3),
+    ('Pasta', 'Various pasta dishes', 2),
+    ('Gelato', 'Authentic Italian ice cream', 1),
+    ('Antipasto', 'Appetizers and snacks', 4),
+    ('Risotto', 'Classic Italian rice dishes', 3),
+    ('Panini', 'Delicious sandwich options', 2),
+    ('Cannoli', 'Traditional Sicilian pastries', 1);
+
+-- 插入 Food 表的数据
+INSERT INTO Food (foodName, foodDescription, foodPrice, producerID, typeName) VALUES 
+    ('Margherita', 'Classic tomato and mozzarella pizza', 8.99, 1, 'Pizza'),
+    ('Carbonara', 'Creamy pasta with bacon and egg', 12.50, 2, 'Pasta'),
+    ('Stracciatella', 'Chocolate chip gelato', 4.99, 3, 'Gelato'),
+    ('Bruschetta', 'Toasted bread with tomatoes and garlic', 6.99, 4, 'Antipasto'),
+    ('Risotto al Funghi', 'Risotto with mushrooms', 10.75, 5, 'Risotto'),
+    ('Caprese Panini', 'Tomato, mozzarella, and basil sandwich', 7.50, 6, 'Panini'),
+    ('Cannoli Siciliani', 'Traditional Sicilian pastry filled with ricotta', 3.99, 7, 'Cannoli');
+
+-- 插入 Order 表的数据
+INSERT INTO `Order` (customerID, riderID, madeTime, deliveredTime) VALUES 
+    (1, 1, '2024-01-29 12:00:00', '2024-01-29 13:15:00'),
+    (2, 2, '2024-01-29 12:30:00', '2024-01-29 14:00:00'),
+    (3, 3, '2024-01-29 13:00:00', NULL),
+    (4, 4, '2024-01-29 13:30:00', NULL),
+    (5, 5, '2024-01-29 14:00:00', NULL),
+    (6, 6, '2024-01-29 14:30:00', NULL),
+    (7, 7, '2024-01-29 15:00:00', NULL);
+
+-- 插入 OrderItem 表的数据
+INSERT INTO OrderItem (orderID, foodID, quantity, subtotal) VALUES 
+    (1, 1, 1, 8.99),
+    (2, 2, 2, 25.00),
+    (3, 3, 3, 14.97),
+    (4, 4, 1, 6.99),
+    (5, 5, 2, 21.50),
+    (6, 6, 1, 7.50),
+    (7, 7, 4, 15.96);
+
+-- 插入 Request 表的数据
+INSERT INTO Request (orderID, requestDate, publishedTime, acceptedTime, publishedBy, acceptedBy, fromAddressID, toAddressID, isCompleted) VALUES 
+    (1, '2024-01-29 11:45:00', '2024-01-29 11:45:00', '2024-01-29 11:50:00', 1, 1, 1, 2, TRUE),
+    (2, '2024-01-29 12:15:00', '2024-01-29 12:15:00', NULL, 2, NULL, 2, 3, FALSE),
+    (3, '2024-01-29 12:45:00', '2024-01-29 12:45:00', '2024-01-29 12:50:00', 3, 3, 3, 4, TRUE),
+    (4, '2024-01-29 13:15:00', '2024-01-29 13:15:00', NULL, 4, NULL, 4, 5, FALSE),
+    (5, '2024-01-29 13:45:00', '2024-01-29 13:45:00', NULL, 5, NULL, 5, 6, FALSE),
+    (6, '2024-01-29 14:15:00', '2024-01-29 14:15:00', '2024-01-29 14:20:00', 6, 6, 6, 7, TRUE),
+    (7, '2024-01-29 14:45:00', '2024-01-29 14:45:00', NULL, 7, NULL, 7, 1, FALSE);
+
+-- 插入 RiderPenalty 表的数据
+INSERT INTO RiderPenalty (riderID, penaltyTime, suspensionDuration) VALUES 
+    (1, '2024-01-29 15:30:00', 120),
+    (2, '2024-01-29 16:00:00', 120),
+    (3, '2024-01-29 16:30:00', 120),
+    (4, '2024-01-29 17:00:00', 120),
+    (5, '2024-01-29 17:30:00', 120),
+    (6, '2024-01-29 18:00:00', 120),
+    (7, '2024-01-29 18:30:00', 120);
