@@ -30,11 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_to_cart"])) {
 
     // Check if the selected food is still available
     $foodAvailabilityQuery = "SELECT Food.*, FoodType.expirationTime,
-                            TIMESTAMPDIFF(MINUTE, Food.createdTime, NOW()) AS elapsedMinutes
-                            FROM Food
-                            INNER JOIN FoodType ON Food.foodTypeID = FoodType.foodTypeID
-                            WHERE NOW() <= DATE_ADD(Food.createdTime, INTERVAL FoodType.expirationTime MINUTE)
-                            AND Food.foodID = $foodID";
+    TIMESTAMPDIFF(MINUTE, Food.createdTime, NOW()) AS elapsedMinutes
+    FROM Food
+    INNER JOIN FoodType ON Food.typeName = FoodType.typeName
+    WHERE NOW() <= DATE_ADD(Food.createdTime, INTERVAL FoodType.expirationTime MINUTE)
+    AND Food.foodID = $foodID";
 
     $foodAvailabilityResult = $conn->query($foodAvailabilityQuery);
 
